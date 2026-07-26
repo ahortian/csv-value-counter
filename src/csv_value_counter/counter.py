@@ -5,7 +5,7 @@ from __future__ import annotations
 import csv
 from collections import Counter
 from pathlib import Path
-from typing import Iterable, Union
+from typing import Iterable
 
 
 class ColumnNotFoundError(ValueError):
@@ -13,7 +13,7 @@ class ColumnNotFoundError(ValueError):
 
 
 def count_values(
-    csv_path: Union[str, Path],
+    csv_path: str | Path,
     column: str,
     values: Iterable[str] | None = None,
     encoding: str = "utf-8",
@@ -38,9 +38,6 @@ def count_values(
         ColumnNotFoundError: If the CSV header does not contain `column`.
     """
     path = Path(csv_path)
-    if not path.exists():
-        raise FileNotFoundError(f"CSV file not found: {path}")
-
     counts: Counter[str] = Counter()
 
     with path.open(newline="", encoding=encoding) as f:
@@ -59,5 +56,5 @@ def count_values(
                 counts[value] += 1
 
     if values is not None:
-        return {v: counts.get(v, 0) for v in values}
+        return {v: counts[v] for v in values}
     return dict(counts)
