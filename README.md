@@ -1,5 +1,4 @@
 # csv-value-counter
-TEST EDIT
 
 [![CI](https://github.com/ahortian/csv-value-counter/actions/workflows/ci.yml/badge.svg)](https://github.com/ahortian/csv-value-counter/actions/workflows/ci.yml)
 [![PyPI version](https://img.shields.io/pypi/v/csv-value-counter.svg)](https://pypi.org/project/csv-value-counter/)
