@@ -60,6 +60,16 @@ def test_cli_text_output(sample_csv: Path) -> None:
     assert "Male" in result.stdout
 
 
+def test_cli_unknown_column_errors(sample_csv: Path) -> None:
+    result = subprocess.run(
+        [sys.executable, "-m", "csv_value_counter.cli", str(sample_csv), "-c", "not_a_column"],
+        capture_output=True,
+        text=True,
+    )
+    assert result.returncode == 1
+    assert "not_a_column" in result.stderr
+
+
 def test_cli_json_output(sample_csv: Path) -> None:
     result = subprocess.run(
         [
